@@ -1,5 +1,5 @@
 import pygame
-from functions import draw,collision
+from functions import draw,collision,jump,setup
 
 pygame.init()
   
@@ -13,11 +13,7 @@ y = 100
 player_width = 20
 player_height = 20
 
-platform_height = 10
-platform_width = 50
 
-platform_X = 200
-platform_y = 350
   
 player_speed = 2
 player_jump = -3.5
@@ -30,6 +26,7 @@ ready_jump = False
 # Indicates pygame is running
 run = True
 
+setup()
 
 # infinite loop 
 while run:
@@ -63,21 +60,17 @@ while run:
         gravity = player_jump
           
     
-    if(y < platform_y  and not y < platform_y - 23):
-      ready_jump = True
-    else:
-      ready_jump = False
+    ready_jump = jump(y)
 
     
     screen.fill((50, 50, 50))   
           
     # completely fill the surface object  
     # with black colour  
-    gravity = collision(gravity, platform_y, platform_width, platform_height, x, y, collision_check, platform_X, fall_speed)
+    gravity = collision(gravity, x, y, collision_check, fall_speed)
     
     y = y + gravity 
-    platform_y += 0.2
-    draw(screen, platform_X, platform_y, platform_width, platform_height, x, y, player_width, player_height)
+    draw(screen, x, y, player_width, player_height)
 
     # it refreshes the window
     pygame.display.update() 
