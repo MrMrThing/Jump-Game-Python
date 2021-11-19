@@ -1,5 +1,5 @@
 import pygame
-from functions import draw,collision,jump,setup
+from functions import draw,collision,jump
 
 pygame.init()
   
@@ -25,8 +25,6 @@ ready_jump = False
 
 # Indicates pygame is running
 run = True
-
-setup()
 
 # infinite loop 
 while run:
