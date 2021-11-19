@@ -24,6 +24,7 @@ speed = 2
 gravity = 5
   
 collision = False
+ready_jump = False
 
 # Indicates pygame is running
 run = True
@@ -61,19 +62,29 @@ while run:
          
 
     if keys[pygame.K_UP] and y>0:
-      if(collision == True):
+      if(ready_jump == True):
         gravity = -2
           
     if(y < platform_y - platform_height - 7 and not y < platform_y - platform_height - 10 and x > platform_X - 15 and x < platform_X + platform_width - 5):
+
       if(collision == False):
         gravity = 0
+      
       collision = True
+      
 
     else:
       if(gravity < 2):
         gravity += 0.02
       collision = False
       
+    if(y < platform_y  and not y < platform_y - 23):
+      print("Hello")
+      ready_jump = True
+    else:
+      print("Fuck you")
+      ready_jump = False
+
     y = y + gravity   
     screen.fill((50, 50, 50))         
     # completely fill the surface object  
